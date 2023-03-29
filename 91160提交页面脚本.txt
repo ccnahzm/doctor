@@ -1,0 +1,2209 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+
+
+
+
+
+
+
+
+<!-- 项目路径 JSTL与js里面都可以取到ctx变量 -->
+
+
+<script type="text/javascript" src="/wxis/businessOptimization/js/crypto-js.js?version=20220111231231228224285750200316"></script>
+
+<script type="text/javascript" src="/wxis/js/jquery-1.4.2.min.js?version=20220111231231228224285750200316"></script>
+
+<script type="text/javascript">
+	// var vConsole = new VConsole();
+
+	var ctx = "/wxis";
+	var unitId = "138";
+	// 统一处理弹窗后，按钮被顶偏移的问题
+	$(function () {
+        $("input").blur(function () {
+            setTimeout(function () {
+                var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+            }, 100);
+        })
+    });
+</script>
+
+
+
+        
+
+<link rel="stylesheet" type="text/css" href="/wxis/resources/easyui/themes/cupertino/easyui.css?version=20220111231231228224285750200316">
+
+<script type="text/javascript" src="/wxis/resources/js/jquery-1.8.0.min.js?version=20220111231231228224285750200316"></script>
+<script type="text/javascript" src="/wxis/resources/easyui/jquery.easyui.min.js?version=20220111231231228224285750200316"></script>
+<script type="text/javascript" src="/wxis/resources/js/jquery.validate.js?version=20220111231231228224285750200316"></script>
+<script type="text/javascript" src="/wxis/resources/js/highcharts.js?version=20220111231231228224285750200316"></script>
+<!-- <script type="text/javascript" src="/wxis/resources/easyui/src/jquery.easyui.js"></script>
+<script type="text/javascript" src="/wxis/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/wxis/resources/lhgdialog/lhgdialog.js"></script> -->
+<!--<script type="text/javascript" src="/wxis/resources/js/base.js"></script>-->
+<script type="text/javascript" src="/wxis/resources/js/common.js?version=20220111231231228224285750200316"></script>
+<script type="text/javascript" src="/wxis/resources/easyui/easyloader.js?version=20220111231231228224285750200316"></script>
+<script type="text/javascript" src="/wxis/js/weixin/common.js?version=20220111231231228224285750200316"></script>
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="hotcss" content="initial-dpr=1">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>提交订单</title>
+        <link rel="stylesheet" type="text/css" href="/wxis//style/reset.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" href="/wxis/report/style/weui.min.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" type="text/css" href="/wxis//iconfont/iconfont_base/font.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" type="text/css" href="/wxis//resources/easyui/themes/default/easyui.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" type="text/css" href="/wxis//style/css.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" type="text/css"
+              href="/wxis/iconfont/iconfont_yinhang/iconfont_yinhang.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" type="text/css" href="/wxis//iconfont/iconfont_sceneSocial/iconfont.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" href="/wxis//style/patient_data.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" href="/wxis//resources/view/wxjsp/order/build-order.css?version=20220111231231228224285750200316">
+        <link rel="stylesheet" href="/wxis/assets/vant/vant2.css" />
+        <script type="text/javascript" src="/wxis//js/weixin/jquery3.3.1.min.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis//businessOptimization/js/hotcss_temp.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis/businessOptimization/js/picker.min.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis/js/weixin/patient_data.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis//js/weixin/swiper.min.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis//js/weixin/jquery.infinitescroll.min.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis/js/weixin/common.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis/js/weixin/guardian.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis//businessOptimization/js/orderSubmit.js?version=20220111231231228224285750200316"></script>
+        <script type="text/javascript" src="/wxis/assets/vue/vue2.js"></script>
+        <script type="text/javascript" src="/wxis/assets/vant/vant2.js"></script>
+        <script type="text/javascript" src="/wxis/assets/axios/axios.js"></script>
+    </head>
+    <body style="padding-bottom:50px;">
+        
+        <input type="hidden" name="needGuardianInfo" id="needGuardianInfo" value=''>
+        
+        <input type="hidden" name="noCardNeedGuardianInfo" id="noCardNeedGuardianInfo"
+               value=''>
+        
+        <input type="hidden" name="guardianMemberId" id="guardianMemberId" value="">
+        <input type="hidden" id="guardianSex" value="">
+        
+        <input type="hidden" id="childenMemberIdGuardian" value="">
+        <input type="hidden" id="childenNameGuardian" value="">
+        <input type="hidden" id="childenCardTypeGuardian" value="">
+        <input type="hidden" id="childenCardNameGuardian" value="">
+        <input type="hidden" id="childenCardNumberGuardian" value="">
+        <input type="hidden" id="childenDateGuardian" value="">
+        <input type="hidden" id="childenSexGuardian" value="">
+        <input type="hidden" id="childenCityGuardian" value="">
+        <input type="hidden" id="childenAreaNameGuardian" value="">
+        <input type="hidden" id="childenAddressGuardian" value="">
+        
+        <!--页面内容-->
+        <div class="maindiv">
+            <form class="order-confirm" id="form1"
+                  action="/wxis//act/order/buildOrder.do?r=1679988726963&method=sch1"
+                  method="post">
+                <input type="hidden" value="200051254" name="branchId">
+                <input type="hidden" value="14" name="payway" id="input_pay_method"/>
+                <input type="hidden" id="socialType" name="socialType"/>
+                
+                <!-- <a class="list_arrow co-5 fts16 padl10 padr10 block bgf mb10 padt10 padb10 order-cf-link" href="#">
+                    预约规则
+                </a> -->
+                <div class="bgf padl10 padr10 padt10 padb10 mb10">
+                    <div class="bg-8 padl10 padr10 padt10 padb10 clr">
+                        <span class="inblo order-cf-label fl clr co-3">就诊人：</span><br>
+                        <div class="fl elli order-cf-div">
+                            
+                                <label class="block fl" style="width: 100%">
+                                    <input class="fl order-cf-input" type="radio" name="mid" id="user"
+                                           value="59177057" 
+                                           onclick="javascript:memberClick(59177057,'','黄忠敏');"/>
+                                    <input type="hidden" id="59177057_membType" value=""/>
+                                    <input type="hidden" id="59177057_membCardNo"
+                                           value=""/>
+                                    <input type="hidden" id="59177057_membHealthNo"
+                                           value=""/>
+                                    <input type="hidden" id="59177057_membName" value="黄忠敏"/>
+                                    
+                                    <input type="hidden" id="member-sex-59177057" value="0">
+                                    
+                                    <p class="fl mr5 controlLength" style="width: 30%">&nbsp;黄忠敏</p>
+                                    
+                                     <!-- 没有开通电子健康卡 -->
+                                        
+                                            
+                                        
+                                        
+                                        
+                                            <span class="co-3 no_card fl">未绑卡</span>
+                                        
+                                    
+                                </label>
+                            
+                                <label class="block fl" style="width: 100%">
+                                    <input class="fl order-cf-input" type="radio" name="mid" id="user"
+                                           value="141115605" 
+                                           onclick="javascript:memberClick(141115605,'4352182','黄正棣');"/>
+                                    <input type="hidden" id="141115605_membType" value=""/>
+                                    <input type="hidden" id="141115605_membCardNo"
+                                           value="4352182"/>
+                                    <input type="hidden" id="141115605_membHealthNo"
+                                           value=""/>
+                                    <input type="hidden" id="141115605_membName" value="黄正棣"/>
+                                    
+                                    <input type="hidden" id="member-sex-141115605" value="0">
+                                    
+                                    <p class="fl mr5 controlLength" style="width: 30%">&nbsp;黄正棣</p>
+                                    
+                                     <!-- 没有开通电子健康卡 -->
+                                        
+                                            
+                                                <span class="co-3 fl">4352182</span>
+                                            
+                                        
+                                        
+                                        
+                                    
+                                </label>
+                            
+
+
+                            
+                                <label class="block fl">
+                                    <input type="radio" name="addmid" id="user" value=""/>
+                                    <span class="mr5">添加就诊人</span>
+                                    <span class="co-3">还可以添加10个</span>
+                                </label>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <ul class="centerlist clearfix" style="display: none">
+                    <li class="cur" id="ArchivesOnlineDiv">
+                        <a href="javascript:void(0)">
+                            在线建档
+                            <i class="icon-angle-right"></i>
+                            <span id="createArchivesOnline">未建档</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="centerlist clearfix" style="display:none;" id="select_memType_id">
+                    <li class="cur">
+                        <a href="javascript:javascript(0);">
+                            用户类型
+                            <span id="span_member_id">自费</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="bgf padl10 padr10 padt10 padb10 mb10">
+                    <div class="bg-8 padl10 padr10 padt10 padb10 clr lh_nor">
+
+                        
+
+                        <div class="clr mb10">
+                            <div class="order-cf-label co-3 fl">就诊科室：</div>
+                            <div class="co-5 lh_nor order-cf-con">口腔科(西院区)</div>
+                        </div>
+                        <div class="clr mb10">
+                            <div class="order-cf-label co-3 fl">就诊医生：</div>
+                            <div class="co-5 lh_nor order-cf-con">石志强</div>
+                        </div>
+                        <div class="clr mb10">
+                            <div class="order-cf-label co-3 fl">挂号级别：</div>
+                            <div class="co-5 lh_nor order-cf-con">主治医师</div>
+                        </div>
+                        <div class="clr mb10">
+                            <div class="order-cf-label co-3 fl">费用：</div>
+                            <div class="co-5 lh_nor order-cf-con" id="order_info_AMT">¥25.0</div>
+                        </div>
+                        <div class="clr mb10">
+                            <div class="order-cf-label co-3 fl">就诊日期：</div>
+                            <div class="co-5 lh_nor order-cf-con">2023-03-30</div>
+                        </div>
+                        
+                        
+                          <div class="clr mb10">
+                            <div class="order-cf-label co-3 fl">就诊时段：</div>
+                            <div class="co-5 lh_nor order-cf-con">14:00-14:30</div>
+                          </div>
+                        
+
+                        <div class="clr">
+                            <div class="order-cf-label co-3 fl">注意事项：</div>
+                            <div class="co-6 lh_nor order-cf-con">
+                                
+                                
+                                    
+                                    
+                                        请携带医保卡及身份证提前30分钟到相应楼层多功能自助终端机取号候诊(生育医保请到收费处人工窗口取号）。
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                
+                
+
+                <input type="hidden" name="yuyueUserType" id="yuyueUserType"/>
+                <input type="hidden" name="memberType" id="memberType"/>
+                
+
+                
+                <div id="notification-module" v-if="notificationShow">
+                    <p v-if="notificationRequire">
+                        <input type="checkbox" v-model="notificationAgree" />
+                        <span>我已阅读并同意</span>
+                        <a @click="showNotificationContent">{{notificationDesc}}</a>
+                    </p>
+                    <p v-else>
+                        <span>请查阅</span>
+                        <a @click="showNotificationContent">{{notificationDesc}}</a>
+                        <span>，若您提交预约，则默认同意以上告知。</span>
+                    </p>
+                </div>
+                
+
+                <input class="surepatient mt10 fts16 tc order-cf-pay" type="button" id="subBtn" value="提交"/>
+            </form>
+            <!-- 弹层 -->
+
+            <div class="pop-mask" id="id-memberType">
+                <div class="pop-select">
+                    <div class="select-con" id="card">
+                        <p data-val="">用户类型</p>
+                        <p data-val="1" id="member_type_1" onclick="javascript:membType(1);">自费</p>
+                        <p data-val="2" id="member_type_2" onclick="javascript:membType(2);">医保</p>
+                    </div>
+                    <p data-val="-1" class="pop-cancel">取消</p>
+                </div>
+            </div>
+
+
+            <div class="takeokshow loadingshow hide">
+                <div class="spinner" style="display: block;border:0">
+                    <div class="spinner-container container1">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                    <div class="spinner-container container2">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                    <div class="spinner-container container3">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                </div>
+                加载中...
+            </div>
+
+            <div class="systemIsloading loadingshow hide" style="position: fixed">
+                <div class="spinner" style="display: block;border:0">
+                    <div class="spinner-container container1">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                    <div class="spinner-container container2">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                    <div class="spinner-container container3">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                </div>
+                加载中...
+            </div>
+
+            <div class="loadingshow hide" id="memberTypeHide">
+                <div class="spinner" style="display: block;border:0">
+                    <div class="spinner-container container1">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                    <div class="spinner-container container2">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                    <div class="spinner-container container3">
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                        <div class="circle4"></div>
+                    </div>
+                </div>
+                正在为您绑定医院的档案中
+            </div>
+        </div>
+
+        <div class="patient_data_content none">
+            <p class="patient_data_hint">
+                为防止黄牛炒卖号源，预约挂号采取实名制。请先补齐 就诊人资料。
+            </p>
+            <ul class="patient_data_input">
+                <li>
+                <span>
+                    姓名
+                </span>
+                    <input type="text" id="mname" name="username" disabled="disabled" value="" placeholder="请输入就诊人姓名">
+                </li>
+                <li>
+                <span>
+                    证件类型
+                    <input type="hidden" id="idcard_type" name="idcard_type" value="1">
+                </span>
+                    <span id="card_names" class="select" value="0">
+                    身份证
+                </span>
+                </li>
+                <li>
+                <span>
+                    证件号码
+                </span>
+                    <input type="text" id="member_idcard" name="cardnumber" placeholder="婴幼儿无身份证可不填写">
+                </li>
+                <li>
+                <span>
+                    出生日期
+                </span>
+                    <span id="birth_date" class="member_bri">
+                    请选择出生日期
+                </span>
+                </li>
+                <li>
+                <span>
+                    性别
+                </span>
+                    <p id="gender">
+                        <input type="radio" name="radio" id="man" value="0" class="radio" checked><label for="man"
+                                                                                                         class="radio">男</label>
+                        <input type="radio" name="radio" id="woman" value="1" class="radio"><label for="woman"
+                                                                                                   class="radio">女</label>
+                    </p>
+                </li>
+                
+            </ul>
+
+            
+            <div id="show_guardian">
+                <div class="patient_guardian">
+                    <p class="patient_guardian_title">
+							<span>
+							<i>
+							  监护人
+							</i>
+							<i>
+								
+							</i>
+							</span>
+                        
+                            <a href="javascript:void(0);" onclick="guardianList()" id="guardianList">
+                                填充已有就诊人
+                            </a>
+                        
+                    </p>
+                    <ul class="patient_guardian_list patient_list">
+                        <li>
+								<span>
+								  监护人姓名
+								</span>
+                            <input type="text" id="guardianTrueName" placeholder="请输入监护人姓名"
+                                   value="">
+                            
+                        </li>
+                        <li>
+								<span>
+								  监护人证件
+								</span>
+                            <p id="patient_guardian_card">
+                                <input type="text" id="guardianCardType" placeholder="请选择证件类型" class="guardian_card"
+                                       readonly onfocus="this.blur()"
+                                       onclick='chooseGuardianCardType(1,[{"label":"身份证","value":"1"},{"label":"港澳居民身份证","value":"2"},{"label":"护照","value":"3"}]);' value="身份证"
+                                       valueCode="1">
+                                
+                                <i></i>
+                            </p>
+                        </li>
+                        <li>
+								<span>
+								  监护人证件号
+								</span>
+                            <input type="text" id="guardianCardNumber" placeholder="请输入监护人证件号"
+                                   value="">
+                        </li>
+                        <li>
+								<span>
+								  监护人出生日期
+								</span>
+                            <p id="patient_guardian_date">
+                                <input type="text" placeholder="请选择出生日期" id="guardian_date" class="date"
+                                       onclick="chooseGuardianBirthday()" onfocus="this.blur()"
+                                       value="">
+                                <i></i>
+                            </p>
+                        </li>
+                        <li>
+								<span>
+								  监护人性别
+								</span>
+                            <p id="patient_guardian_gender">
+                                <input type="radio" name="patient_guardian_radio" id="patient_guardian_man"
+                                       class="radio" value="0"><label for="patient_guardian_man" class="radio">男</label>
+                                <input type="radio" name="patient_guardian_radio" id="patient_guardian_woman"
+                                       class="radio" value="1"><label for="patient_guardian_woman"
+                                                                      class="radio">女</label>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="patient_data_text">
+                就诊人资料保存后不可修改，请仔细核对！
+            </p>
+            <button class="patient_data_btn">
+                确认
+            </button>
+        </div>
+
+        
+        
+        <script>
+            window.vm = new Vue({
+                el: '#notification-module',
+                data(){
+                    return {
+                        notificationShow: false,
+                        notificationRequire: false,
+                        notificationDesc: '',
+                        notificationTitle: '',
+                        notificationContent: '',
+                        notificationAgree: false,
+                        checkMemberId: '',
+                        checkMemberSex: ''
+                    }
+                },
+                methods: {
+                    setData(){
+                        this.$nextTick(()=>{
+                            const memberId = document.querySelector('#user:checked').value
+                            this.checkMemberId = memberId
+                            // console.log('this.checkMemberId:',this.checkMemberId)
+                            const memberSex = document.querySelector('#member-sex-'+memberId).value
+                            this.checkMemberSex = memberSex
+                            // console.log('this.checkMemberSex:',this.checkMemberSex)
+                            axios.get('/wxis/act/order/getYuyueConfig.do',{
+                                params: {
+                                    unit_id: '138',
+                                    dep_id: '4703',
+                                    doc_id: '100220744',
+                                    member_id: this.checkMemberId,
+                                }
+                            }).then(result=>{
+                                const data = result.data.data
+                                // console.log('data:',data)
+                                if(data){
+                                    this.notificationShow = data.rule_need_write_form && data.rule_need_write_form === '1'
+                                    this.notificationRequire = data.rule_form_need_compel && data.rule_form_need_compel === '1'
+                                    this.notificationDesc = data.rule_form_comment
+                                    this.notificationTitle = '知情告知书'
+                                    this.notificationContent = `
+                                    <iframe class="content" src="${data.rule_form_url}"></iframe>
+                                    `
+                                }else{
+                                    this.notificationShow = false
+                                    this.notificationRequire = false
+                                    this.notificationDesc = ''
+                                    this.notificationTitle = ''
+                                    this.notificationContent = ''
+                                }
+                                this.notificationAgree = false
+                            }).catch(error=>{
+                                // console.log('error:',error)
+                            })
+                        })
+                    },
+                    showNotificationContent(){
+                        vant.Dialog.alert({
+                            title: this.notificationTitle,
+                            message: this.notificationContent,
+                            className: 'check-notification-dialog',
+                            confirmButtonText: '同意并继续',
+                        }).then(()=>{
+                            this.notificationAgree = true
+                        })
+                    }
+                }
+            })
+        </script>
+        
+        
+        <script type="text/javascript">
+            var openSupCard = '1';
+            $(function () {
+                //如果有guardianMember数据则表示为选择监护人页面回调，把监护人以及儿童信息填充到页面
+                var guardianMemberId = $("#guardianMemberId").val();
+                if (guardianMemberId != '') {
+                    $(".maindiv").addClass("none");
+                    hotcss.mresize();
+                    $(".patient_data_content").removeClass("none");
+                    $(document).attr('title', '就诊人资料补充');
+
+                    $('input:radio[name="mid"][value=]').click();
+                    $("#mname").val($("#childenNameGuardian").val());
+                    var childenCardTypeGuardian = $("#childenCardTypeGuardian").val();
+                    if (childenCardTypeGuardian != '') {
+                        $('#card_names').addClass('select');
+                        $('#card_names').html($("#childenCardNameGuardian").val());
+                        $("#idcard_type").val(childenCardTypeGuardian);
+                    }
+                    $("#member_idcard").val($("#childenCardNumberGuardian").val());
+                    $(".member_bri").text($("#childenDateGuardian").val());
+                    $(".cityinput").val($("#childenAreaNameGuardian").val());
+                    $("#countiesId").val($("#childenCityGuardian").val());
+                    $("#detaladdress").text($("#childenAddressGuardian").val());
+                    var childSex = $("#childenSexGuardian").val();
+                    if (childSex == "0") {
+                        $("#man").click();
+                    } else if (childSex == "1") {
+                        $("#woman").click();
+                    }
+                    var guardianCardType = '';
+                    if (guardianCardType == '') {
+                        $("#guardianCardType").val('身份证');
+                        $("#guardianCardType").attr('valueCode', '1');
+                    } else {
+                        $("#guardianCardType").val('');
+                        $("#guardianCardType").attr('valueCode', '');
+                    }
+                    var guardianSex = $("#guardianSex").val();
+                    if (guardianSex == "0") {
+                        $("#patient_guardian_man").click();
+                    } else if (guardianSex == "1") {
+                        $("#patient_guardian_woman").click();
+                    }
+                }
+                showGuarDian($(".member_bri").text(), $("#member_idcard").val());//展示监护人输入框
+
+                $("input,textarea").blur(function () {
+                    setTimeout(function () {
+                        var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                        window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+                    }, 100);
+                })
+
+                var lis = '';
+                if (false) {
+                    lis = [{label: '身份证', value: 1}];
+                } else {
+                    lis =[{"label":"身份证","value":"1"},{"label":"港澳居民身份证","value":"2"},{"label":"护照","value":"3"}];
+                }        //证件类型弹窗
+                
+                document.querySelector('#card_names').addEventListener('click', function () {
+                    weui.picker(lis, {
+                        className: 'card_names',
+                        container: 'body',
+                        defaultValue: [1],
+                        // onChange: function (result) {
+                        // 	$('#card_name').html(result[0].label)
+                        // },
+                        onConfirm: function (result) {
+                            $('#card_names').addClass('select')
+                            $('#card_names').html(result[0].label)
+                            $('#idcard_type').val(result[0].value)
+                        },
+                        id: 'card_names'
+                    });
+                })
+
+                var healthCardBindStatus = "";
+                if (healthCardBindStatus == '0') {
+                    pop_tips_show("添加失败", "此就诊人已存在电子健康卡");
+                    setTimeout(close_pop_tips_show, 3000);
+
+                } else if (healthCardBindStatus == '1') {
+                    pop_tips_show("温馨提示", "添加电子健康卡成功");
+                    setTimeout(close_pop_tips_show, 3000);
+
+                } else if (healthCardBindStatus == '-1') {
+                    pop_tips_show("添加失败", "请确认后再试！");
+                    setTimeout(close_pop_tips_show, 3000);
+
+                } else if (healthCardBindStatus == '-2') {
+                    pop_tips_show("添加失败", "实名认证失败，请确认后再试");
+                    setTimeout(close_pop_tips_show, 3000);
+
+                } else if (healthCardBindStatus == '-3') {
+                    pop_tips_show("添加失败", "网络异常，关联医院就诊档案失败，请稍后重试。");
+                    setTimeout(close_pop_tips_show, 3000);
+                } else if (healthCardBindStatus == '-4') {
+                    pop_tips_show("添加失败", "证件类型不支持，请选择其他证件类型.");
+                    setTimeout(close_pop_tips_show, 3000);
+                } else if (healthCardBindStatus == '-5') {
+                    pop_tips_show("申领页面填写信息与当前就诊人信息不符合，请重新填写！");
+                    setTimeout(close_pop_tips_show, 3000);
+                }
+
+                //只有回调才会显示
+                var bindMedicalIsSuccess = "";
+                var bindMedicalIsSuccessUrl = ""
+                if (bindMedicalIsSuccess == '1') {
+                    var content = "绑定社保卡成功.";
+                    pop_tips_show("温馨提示",content);
+                    //三秒自动隐藏
+                    setTimeout(close_pop_tips_show, 3000);
+                } else if (bindMedicalIsSuccess == '-1') {
+                    var content = "社保卡绑定失败，请重试。";
+                    pop_two_button_tips_show("温馨提示", content, oksubmit, "重试", close_two_button_tips, "我知道了");
+
+                } else if (bindMedicalIsSuccess == '2') {
+                    sendUrl = bindMedicalIsSuccessUrl;
+                    window.location = sendUrl;
+
+                } else if (bindMedicalIsSuccess == '4') {
+                    pop_tips_social_pay_no_first_adult('');
+
+                } else if (bindMedicalIsSuccess == '5') {
+                    pop_tips_social_pay_name_no_match_adult('');
+
+                } else if (bindMedicalIsSuccess == '6') {
+                    sendUrl = bindMedicalIsSuccessUrl;
+                    pop_tips_social_pay_name_no_match_child('');
+                }
+                //国标医保2.0免密授权回调
+                var stateDescCode = "";
+                if(stateDescCode=="0"){
+                    pop_tips_show("温馨提示","授权失败，请重新授权");
+                    //三秒自动隐藏
+                    setTimeout(close_pop_tips_show, 3000);
+                }else if(stateDescCode=="1"){
+                    pop_tips_show("温馨提示","授权成功，下单失败");
+                    //三秒自动隐藏
+                    setTimeout(close_pop_tips_show, 3000);
+                }else if(stateDescCode=="2"){
+                    pop_tips_show("温馨提示","授权失败，请重新授权");
+                    //三秒自动隐藏
+                    setTimeout(close_pop_tips_show, 3000);
+                }else if(stateDescCode=="3"){
+                    pop_tips_show("温馨提示","暂不支持非本人订单进行在线医保结算");
+                    //三秒自动隐藏
+                    setTimeout(close_pop_tips_show, 3000);
+                }
+                $("#user:checked").click();
+                var hasBirthday = 0;//是否有出生日期的标识
+                var unit_id = '138';
+                var dep_id = '4703';
+                var doc_id = '100220744';
+                var ownPayTips = ''
+
+                // 城市选择
+                if (false) {
+                    initCitySel();
+                }
+
+                // 初始化城市选择控件
+                function initCitySel() {
+                    var areaData = getAreaData("/wxis/selectCity/findAreaListByPicker.do");
+                    //console.log("areaData:" + areaData);
+                    if (areaData == null) {
+                        pop_has_title_tips("获取地区信息错误, 请重试");
+                        return;
+                    }
+
+                    document.querySelector('#city').addEventListener('click', function () {
+                        weui.picker(areaData, {
+                            depth: 4,
+                            defaultValue: [2, 2918],
+                            /*onChange: function (result) {
+                                $('.cityinput').val(result[0].label + '-' + result[1].label + '-' + result[2].label)
+                                $("#countiesId").val(result[2].value);
+                            },*/
+                            onConfirm: function (result) {
+
+                                //这里加判断是为了防止基础资料接口只传省市导致的异常
+                                var indexs = result.length;
+                                if (indexs == 4) {
+                                    $('.cityinput').val(result[0].label + ' ' + result[1].label + ' ' + result[2].label + ' ' + result[3].label)
+                                } else if (indexs == 3) {
+                                    $('.cityinput').val(result[0].label + ' ' + result[1].label + ' ' + result[2].label)
+                                } else if (indexs == 2) {
+                                    $('.cityinput').val(result[0].label + ' ' + result[1].label)
+                                } else if (indexs == 1) {
+                                    $('.cityinput').val(result[0].label)
+                                }
+                                $("#countiesId").val(result[indexs - 1].value);
+                            },
+                            id: 'city'
+                        });
+                    });
+                }
+
+                //获取地区数据
+                function getAreaData(url) {
+                    var result = null;
+                    //获取地区数据
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        dataType: 'json',
+                        async: false,
+                        success: function (res) {
+                            if (res.status != -1) {
+                                var resultData = res.data;
+                                if (resultData.size != 0) {
+                                    result = resultData;
+                                }
+                            }
+                        }
+                    });
+                    return result;
+                }
+
+                // 获取tips配置
+                function initTips(){
+                  $.ajax({
+                    url: /wxis/+'act/BillPayTipConfig.do',
+                    type: 'post',
+                    data: { 'unitId': unitId },
+                    dataType: 'json',
+                    success: function (res) {
+                      if (res.success){
+                        ownPayTips = res.object
+                        //	配置了tips
+                        if (res.object){
+                          //	配置不为空值 显示配置内容
+                          $("#yibao").text(res.object)
+                        } else {
+                          //	配置为空 tip内容为空
+                          $("#yibao").text('')
+                        }
+                      }else {
+                        //	没有配置tips  显示默认的文案不做任何处理
+                      }
+                    }
+                  });
+                }
+                initTips()
+
+                // 提交订单
+                $('#subBtn').on('click', function (e) {
+                    // 接入神策数据埋点-按钮点击
+                    window.sendSensorsDataClickButton()
+                    createMask();//防止多次点击
+                    var memberId = $("#user:checked").val();
+                    var yuyueUserType = "";
+                    var memberCardNo = $("#" + memberId + "_membCardNo").val();//就诊卡号
+                    var memberTrueName = $("#" + memberId + "_membName").val();//姓名
+                    var memberHealthNo = $("#" + memberId + "_membHealthNo").val();//电子健康卡号
+                    var needGuardianInfo = $("#needGuardianInfo").val();//有证件儿童是否需要监护人
+                    var noCardNeedGuardianInfo = $("#noCardNeedGuardianInfo").val();//无证件儿童是否需要监护人
+
+                    if (memberId == null || memberId == '' || undefined == memberId) {
+                        pop_tips_show_wrap("下单须知", "请选择就诊人");
+                        cancelMask();
+                        return false;
+                    }
+
+                    var memberVerify = getVerifyFlag(memberId);
+                    if (memberVerify == "1") {
+                        cancelMask();
+                        pop_two_button_tips_show_common("温馨提示", "您的账号由于取消次数过多，需完成实名认证后才能继续预约挂号，请点击按钮前往实名认证", "close_two_button_tips", "关闭", "toCertification", "前往认证");
+                        return false;
+                    }
+
+                    //设置紧急联系人
+                    if (false) {
+                        pop_tips_show_wrap("下单须知", "请设置紧急联系人");
+                        cancelMask();
+                        return false;
+                    }
+                    var chooseMemberId = $("input[name='mid']:checked").val();
+                    var chooseMemberTrueName = $('#' + chooseMemberId + '_membName').val();
+                    var addEmergencyContactName = $('#addEmergencyContact').text();
+                    if (false) {
+                        if (addEmergencyContactName == chooseMemberTrueName) {
+                            pop_tips_show_wrap("下单须知", "紧急联系人不能是当前就诊人");
+                            return false;
+                        }
+                    }
+
+                    if (false &&  !$("input[name='isAgree']:checked").val()){
+                        pop_tips_show_wrap("温馨提示", "请先阅读确认知情同意书");
+                        return false;
+                    }
+
+                    //支持医保并选择医保支付必须绑定就诊卡
+                    if ("1" == '') {
+                        var payway = "";
+                        var obj = $(".payway li");
+                        var method = obj.find("a[class='paybor']").attr("data-method");
+                        $("#input_pay_method").val(method);
+                        if (method == '' || method == null) {
+                            pop_tips_show_wrap("温馨提示", "请选择用户类型！");
+                            return false;
+                        }
+                        if (method == '25' || method == '22') {
+                            yuyueUserType = "1";
+                            $('#yuyueUserType').val(yuyueUserType);//yuyueUserType 1代表医保用户
+                            if (memberCardNo == null || memberCardNo == '' || memberCardNo == 'null') {
+                                pop_tips_show_wrap("医保支付须知", "选择付费类型为医保支付, 必须绑定就诊卡!");
+                                return false;
+                            }
+                        } else {
+                            $('#yuyueUserType').val(yuyueUserType);//yuyueUserType 1代表医保用户
+                        }
+                        if ((method == '251' || method == '221') && "1" != '') {
+                            //判断当前是否绑卡、是否绑定的是身份证
+                            let isToBind = (memberCardNo == null || memberCardNo == '') ? true : !checkCardMethod(memberCardNo);
+                            //判断医保挂号是否需要绑定身份证
+                            if ('1' == '' && isToBind) {
+                                document.getElementById("mask_div").style.display = 'none';
+                                pop_two_button_tips_bindcard(memberId, memberTrueName);
+                                return false;
+                            }
+                            if (memberCardNo == null || memberCardNo == '' || memberCardNo == 'null') {
+                                pop_tips_show_wrap("医保支付须知", "选择付费类型为少儿医保, 必须绑定就诊卡!");
+                                return false;
+                            }
+                        }
+                        if ('221' == method) {
+                            $("#input_pay_method").val("22");
+                            $("#socialType").val("childSocial")
+                            yuyueUserType = "1";
+                        }
+                        if ('251' == method) {
+                            yuyueUserType = "1";
+                            $("#input_pay_method").val("25");
+                            $("#socialType").val("childSocial")
+                        }
+                        if ('252' == method) {
+                            //现场医保支付
+                            yuyueUserType = "2";
+                            $("#input_pay_method").val("25");
+                            $("#socialType").val("sceneSocial")
+                        }
+                        $('#yuyueUserType').val(yuyueUserType);
+                    }
+
+                    var memberTypeFlag = '';
+                    var yuyueMustIDAgeLimit = '16';
+                    if ("1" == memberTypeFlag) {
+                        var memberCardNo = $("#" + memberId + "_membCardNo").val();
+                        var memberName = $("#" + memberId + "_membName").val();
+                        var memberType = $("#" + memberId + "_membType").val();
+
+                        var card_type = "2"; //查询失败默认为2
+                        var requestParam = {
+                            'unitId': '138',
+                            'cardNo': memberCardNo,
+                            'name': memberName
+                        };
+                        $.ajax({
+                            url: '/wxis/ajax/queryMemberType.do?r=1679988726964',
+                            type: 'post',
+                            data: requestParam,
+                            async: false,
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.result == "1") {
+                                    card_type = data.data[0].card_type;
+                                }
+                            }
+                        });
+
+                        if (memberType != card_type) {
+                            //flagRet = confirm("医院用户类型有更新！");
+                            $("#memberTypeHide").show();
+                            $.ajax({
+                                url: '/wxis/ajax/addMemberType.do',
+                                type: 'post',
+                                data: {
+                                    'memberId': memberId,
+                                    'card_type': card_type
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.code == "success") {
+                                        $("#" + memberId + "_membType").val(card_type);
+                                    }
+                                },
+                                complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                                    $("#memberTypeHide").hide();
+                                }
+                            });
+                        }
+                        //$("#memberType").val(card_type);
+                    }
+
+                    // 开通了电子健康卡 && 挂号下单需要使用电子健康卡 && 卡号是空
+                    if (false &&
+                    (memberHealthNo == undefined || memberHealthNo == null || memberHealthNo == '')
+                )
+                    {
+                        var redirectUrl = encodeURIComponent(encodeURIComponent("/act/order/buildOrderPage.do"));
+                        window.location.href = "/wxis/act/card/tencent/regist/upgrades.do?unitId=138&memberId=" + memberId + "&redirectUrl=" + redirectUrl;
+                        return false;
+                    }
+
+                    // 电子健康卡绑定失败 && 没有就诊卡 && 开通了需要就诊卡
+                    if (false &&
+                    memberCardNo == '' && '' == '1'
+                )
+                    {
+                        location.href = /wxis/+'/act/member/cardBind.do?trueName=' + memberTrueName + '&memberId=' + memberId + '&redirectUrl=/act/order/buildOrderPage.do';
+                        $(this).removeAttr("checked");
+                        return false;
+                    }
+
+                    // 两癌筛查预约新增条件校验
+                    if(vm.notificationShow && vm.notificationRequire && !vm.notificationAgree){
+                        vant.Toast('请阅读并且勾选两癌筛查同意书相关内容！')
+                        cancelMask()
+                        return false
+                    }
+                    if(vm.notificationShow){
+                        if(!vm.checkMemberSex){
+                            vant.Toast('就诊人性别为空！')
+                            cancelMask()
+                            return
+                        }
+                        if(vm.checkMemberSex === '0'){
+                            vant.Dialog.alert({
+                                titile: '预约失败',
+                                message: '该项目仅支持女性预约，所选就诊人未在两癌筛查规定的性别范围内！',
+                                confirmButtonText: '我知道了',
+                                className: 'check-sex-dialog'
+                            })
+                            cancelMask()
+                            return false
+                        }
+                    }
+                    if(vm.notificationShow){
+                        axios.get('/wxis/act/order/hasReport.do',{
+                            params: {
+                                unit_id: '138',
+                                dep_id: '4703',
+                                doc_id: '100220744',
+                                member_id: vm.checkMemberId
+                            }
+                        }).then(result=>{
+                            const data = result.data
+                            // console.log('【查询就诊记录】请求成功：',data)
+                            // 返回失败，提交订单，直接返回
+                            if(data.result_code !== 1){
+                                // console.log('返回失败，提交订单，直接返回')
+                                submitOrder()
+                                return
+                            }
+                            // 没有就诊记录，提交订单，直接返回
+                            if(!data.has_report){
+                                // console.log('没有就诊记录，提交订单，直接返回')
+                                submitOrder()
+                                return
+                            }
+                            // 存在就诊记录，确认之后，提交订单
+                            if(data.has_report){
+                                // console.log('存在就诊记录，确认之后，提交订单')
+                                vant.Dialog.confirm({
+                                    title: '请注意',
+                                    message: '由于您在市妇幼系统已存在就诊记录，如仍需要筛查，则需要自费支付，是否自费筛查。若您自费筛查，请于就诊日当天在医院窗口支付。',
+                                    confirmButtonText: '自费筛查',
+                                    cancelButtonText: '返回',
+                                    className: 'check-price-dialog'
+                                }).then(()=>{
+                                    document.querySelector('#order_info_AMT').textContent = '¥'+data.price
+                                    document.querySelector('#order_info_AMT').style = 'color:#E13122'
+                                    submitOrder()
+                                }).catch(()=>{
+                                    // console.log('【查询就诊记录】弹窗返回！')
+                                    cancelMask()
+                                })
+                            }
+                        }).catch(error=>{
+                            // console.log('【查询就诊记录】请求失败:',error)
+                        })
+                        return
+                    }
+                    //两癌筛查预约新增条件校验
+
+                    submitOrder()
+
+                    function submitOrder(){
+                        $.ajax({
+                            url: '/wxis/act/order/checkMember.do?r=1679988726965',
+                            type: 'post',
+                            data: {
+                                'memberId': memberId,
+                                'yuyueUserType': yuyueUserType,
+                                'yuyueMustIDAgeLimit': yuyueMustIDAgeLimit,
+                                'socialType': $("#socialType").val(),
+                                'dep_id': dep_id,
+                                'doc_id': doc_id,
+                                'needGuardianInfo': needGuardianInfo,
+                                'noCardNeedGuardianInfo': noCardNeedGuardianInfo
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                $("#mname").val("");
+                                $("#member_idcard").val("");
+                                $(".member_bri").html("");
+                                $("#man").removeAttr("checked");
+                                $("#woman").removeAttr("checked");
+                                if (data.code == "true") {
+                                    //检查就诊人信息符合规范，提交订单
+                                    $(this).attr('disabled', true);
+                                    $(this).addClass('is-disabled');
+                                    //儿童医院判断是否已建档
+                                    if (unit_id == '111' && $("#createArchivesOnline").text() != "已建档") {
+                                        pop_tips_nopay();
+                                    } else {
+                                        if ($("#input_pay_method").val() == '25' || $("#input_pay_method").val() == '22') {
+                                            //检查是否绑定医保卡
+                                            if (checkIsMedicalCard()) {
+                                                ifjiashou(memberId, dep_id, doc_id, unit_id)
+                                            }
+                                        } else {
+                                            ifjiashou(memberId, dep_id, doc_id, unit_id)
+                                        }
+                                    }
+                                } else {
+                                    cancelMask();
+                                    if (data.data.name != '') {
+                                        $("#mname").val(data.data.name);
+                                    }
+                                    if (data.data.idCard != '') {
+                                        $("#member_idcard").val(data.data.idCard);
+                                        // $("#member_idcard").attr("disabled","disabled");
+                                        // $("#idcard_type").val(data.data.idCardType);
+                                        //$('#card_names').html(result[0].label)
+                                        if (openSupCard != '1' && data.data.idCardType != '1') {
+                                            $("#member_idcard").removeAttr("disabled");
+                                        } else if (openSupCard == '1' && data.data.idCardType != '1') {
+                                            var cardName = getIdNameByCode(data.data.idCardType)
+                                            $('#card_names').html(cardName)
+                                            $("#idcard_type").val(data.data.idCardType);
+                                        }
+                                    }
+                                    if (data.data.birthday != '') {
+                                        $(".member_bri").html(data.data.birthday);
+                                        $(".member_bri").addClass('select')
+                                        $(".member_bri").removeAttr("id")
+                                        $(".member_bri").attr("disabled", "disabled");
+                                        hasBirthday = 1;
+                                    } else {
+                                        hasBirthday = 0;
+                                    }
+                                    if (data.data.sex != '') {
+                                        if (data.data.sex == 0) {
+                                            $("#man").click();
+                                            /*$("#man").attr("checked","true");
+                                            $("#woman").attr("disabled","disabled");*/
+                                        } else if (data.data.sex == 1) {
+                                            $("#woman").click();
+                                            /*$("#woman").attr("checked","true");
+                                            $("#man").attr("disabled","disabled");*/
+                                        }
+                                    }
+                                    if (data.data.countiesId != '') {
+                                        $(".cityinput").val(data.data.areaName);
+                                        $("#countiesId").val(data.data.countiesId);
+                                    }
+                                    if (data.data.address != '') {
+                                        $("#detaladdress").val(data.data.address);
+                                    }
+                                    if (data.data.guardianMember != undefined && data.data.guardianMember != null) {
+                                        if (data.data.guardianMember.trueName != undefined && data.data.guardianMember.trueName != null) {
+                                            $("#guardianTrueName").val(data.data.guardianMember.trueName);
+                                        }
+                                        if (data.data.guardianMember.idCard != undefined && data.data.guardianMember.idCard != null) {
+                                            $("#guardianCardType").val(data.data.guardianMember.idCard.cardName);
+                                            $("#guardianCardType").attr('valuecode', data.data.guardianMember.idCard.cardType);
+                                            $("#guardianCardNumber").val(data.data.guardianMember.idCard.number);
+                                        }
+                                        if (data.data.guardianMember.birthday != undefined && data.data.guardianMember.birthday != null) {
+                                            $("#guardian_date").val(data.data.guardianMember.birthday);
+                                        }
+                                        if (data.data.guardianMember.sex != undefined && data.data.guardianMember.sex != null) {
+                                            var guardianSex = data.data.guardianMember.sex;
+                                            if (guardianSex == "0") {
+                                                $("#patient_guardian_man").click();
+                                            } else if (guardianSex == "1") {
+                                                $("#patient_guardian_woman").click();
+                                            }
+                                        }
+                                    }
+                                    //$('#id-mask').show();
+                                    //填充监护人按钮是否展示
+                                    if (data.data.guardianNumber > 0) {
+                                        cancelMask();
+                                        $("#guardianList").show();
+                                    } else if (data.data.guardianNumber == 0) {
+                                        $("#guardianList").hide();
+                                    }
+                                    $(".maindiv").addClass("none")
+                                    hotcss.mresize();
+                                    $(".patient_data_content").removeClass("none")
+                                    $(document).attr('title', '就诊人资料补充');
+                                    showGuarDian($(".member_bri").text(), $("#member_idcard").val());
+                                }
+                            }
+                        });
+                    }
+
+                });
+
+                //身份证输入完成后，自动填充出生日期和性别
+                $("#member_idcard").on('blur', function () {
+                    var memeberIdCard = x2X($.trim($("#member_idcard").val()));
+                    if (checkCardMethod(memeberIdCard)) {
+                        if (memeberIdCard.length == 18) {
+                            //出生日期 ---用户已有出生日期的，不可修改，不需要自动填充
+                            if (hasBirthday != 1) {
+                                var member_birthday = memeberIdCard.substr(6, 4) + "-" + memeberIdCard.substr(10, 2) + "-" + memeberIdCard.substr(12, 2);
+                                $(".member_bri").html(member_birthday);
+                                $(".member_bri").attr("disabled", "disabled");
+                                $(".member_bri").addClass('select')
+                                $(".member_bri").removeAttr("id")
+                                //$("#member_birthday").removeClass("date");
+                            }
+                            //性别
+                            var member_sex = memeberIdCard.substr(16, 1) % 2 == 0 ? 1 : 0;
+                            if (member_sex == 0) {
+                                $("#man").attr("checked", "true");
+                            } else if (member_sex == 1) {
+                                $("#woman").attr("checked", "true");
+                            }
+                            $("#man").attr("disabled", "true");
+                            $("#woman").attr("disabled", "true");
+                        } else {
+                            if (hasBirthday != 1) {
+                                $(".member_bri").removeAttr("disabled");
+                                //$("#member_birthday").addClass("date");
+                            }
+                            $("#man").removeAttr("disabled");
+                            $("#woman").removeAttr("disabled");
+                        }
+                    } else {
+                        if (hasBirthday != 1) {
+                            $(".member_bri").removeAttr("disabled");
+                            $(".member_bri").addClass("date");
+                        }
+                        $("#man").removeAttr("disabled");
+                        $("#woman").removeAttr("disabled");
+                    }
+                    showGuarDian($(".member_bri").text(), $("#member_idcard").val());
+                });
+
+                //补全资料的提交
+                $(".patient_data_btn").on('click', function () {
+                    cancelMask();
+                    var countiesName = '';
+                    var memberId = $("#childenMemberIdGuardian").val();
+                    if (memberId == '' || memberId == undefined) {
+                        memberId = $("#user:checked").val();
+                    }
+                    var idCardType = $('#idcard_type').val();
+                    var memeberIdCard = x2X($("#member_idcard").val());
+                    var memberBirthday = $(".member_bri").html();
+                    var memberSex = $("input[name='radio']:checked").val();
+                    var countiesId = $("#countiesId").val();
+                    var detaladdress = $("#detaladdress").val();
+                    //下单时，用户性别为空，会提示“下单失败，传入参数有误！”，将性别也设成必填项
+
+                    if (memberBirthday == '') {
+                        pop_tips_show_wrap("温馨提示", "出生日期不可为空！");
+                        return
+                    } else if (memberSex != 0 && memberSex != 1) {
+                        pop_tips_show_wrap("温馨提示", "请选择性别！");
+                        return;
+                    } else if (countiesId == '' &&false) {
+                        pop_tips_show_wrap("温馨提示", "请选择所在城市！");
+                        return
+                    } else if (detaladdress == '' &&false) {
+                        pop_tips_show_wrap("温馨提示", "请输入详细地址!");
+                        return
+                    } else {
+
+                        if (idCardType == '1') { //证件类型为1  身份证
+                            //查看出生日期是否超过指定年龄
+                            // memberBirthday = memberBirthday.replace(/-/g, '/');
+                            var birthdayDate = new Date(memberBirthday);
+                            var nowDate = new Date();
+                            var yuyueMustIDAgeLimit = '16';
+                            //只有运营后台配置身份证校验年龄才需校验身份证
+                            if (memeberIdCard == '') {
+                                //身份证为空并且yuyueMustIDAgeLimit不为空时 需要校验超过该年龄身份证必填
+                                if (undefined != yuyueMustIDAgeLimit && '' != yuyueMustIDAgeLimit && null != yuyueMustIDAgeLimit) {
+                                    yuyueMustIDAgeLimit = parseInt(yuyueMustIDAgeLimit);
+                                    var fullyear = birthdayDate.getFullYear();
+                                    fullyear += yuyueMustIDAgeLimit;
+                                    birthdayDate.setFullYear(fullyear);
+                                    if (nowDate.getTime() > birthdayDate.getTime()) {
+                                        pop_tips_show_wrap("温馨提示", "超过" + yuyueMustIDAgeLimit + "周岁，身份证号不可为空！");
+                                        return;
+                                    }
+                                }
+                            } else if (!checkCardMethod(memeberIdCard)) {
+                                pop_tips_show_wrap("温馨提示", "身份证无效!");
+                                //$("#member_idcard").focus();
+                                return;
+                            }
+                        } else {  //其他证件类型
+                            if (isEmpty(idCardType) || isEmpty(memeberIdCard)) {
+                                pop_tips_notitle("证件类型和证件号码不能为空！");
+                                return;
+                            }
+                            if (!checkCertificate(/wxis/, idCardType, memeberIdCard)) {
+                                pop_tips_notitle("证件号码无效！");
+                                return;
+                            }
+
+                        }
+                        if (false) {
+                            countiesName = $(".cityinput").val();
+                        }
+                        //检查监护人参数信息
+                        var checkResult = checkGuardianInfo(/wxis/);
+                        if (checkResult != '') {
+                            pop_tips_notitle(checkResult);
+                            return;
+                        }
+                        saveGuardianInfo();
+                        if ($("#guardianTrueName").val() != '' && $("#guardianMemberId").val() == '') {
+                            //输入框有监护人信息，但监护人id未填充在页面。则说明监护人保存失败
+                            return;
+                        }
+                        //保存用户信息
+                        saveMember(memberId, idCardType, memeberIdCard, memberBirthday, memberSex, countiesId, countiesName, detaladdress, $("#guardianMemberId").val(), dep_id, doc_id, unit_id);
+                    }
+                });
+                
+                //刷新验证码
+                $('#vertifyCodeImg').on('click', function (e) {
+                    $(this).attr('src', '/wxis//icode.do?rnd=' + Math.random());
+                });
+
+                var msg = ``;
+                if (msg != null && msg != '') {
+                    alert(msg);
+                }
+
+                
+                if ("138" == "111") {
+                    $('#ArchivesOnlineDiv').parent("ul").show();
+                    if ($('[name=mid]:checked').val() != null) {
+                        queryArchivesOnline();
+                    }
+                    var user = $('[name=mid]');
+                    $('[name=mid]').on('click', function (e) {
+                        queryArchivesOnline();
+                    });
+                }
+
+                //点击切换"就诊人"
+                $("input[name=mid]").click(function () {
+                    var memberId = $(this).val();
+                    var memberHealthNo = $("#" + memberId + "_membHealthNo").val();//电子健康卡号
+                    //点击"未绑卡"
+                    if ($(this).nextAll(".no_card").text() == "未绑卡" && '' == "1") {
+                        location.href = /wxis/+'/act/member/cardBind.do?trueName=' + $(this).next().text() + '&memberId=' + $(this).val() + '&redirectUrl=/act/order/buildOrderPage.do';
+                        $(this).removeAttr("checked");
+                    } else if ((memberHealthNo == undefined || memberHealthNo == null || memberHealthNo == '') && false) {
+                        //开通二合一，直接去cardBind.do接口
+                        if (false) {
+                            location.href = /wxis/+'/act/member/cardBind.do?trueName=' + $(this).next().text() + '&memberId=' + $(this).val() + '&redirectUrl=/act/order/buildOrderPage.do';
+                            $(this).removeAttr("checked");
+                        } else {
+                            // 开通了电子健康卡 && 挂号下单需要使用电子健康卡 && 卡号是空
+                            var redirectUrl = encodeURIComponent(encodeURIComponent("/act/order/buildOrderPage.do"));
+                            window.location.href = "/wxis/act/card/tencent/regist/upgrades.do?unitId=138&memberId=" + memberId + "&redirectUrl=" + redirectUrl;
+                            $(this).removeAttr("checked");
+                        }
+                    } else {
+                        //已绑卡，如果是儿童医院，则检查是否在线建卡
+                        if ("138" == "111") {
+                            //开通二合一，直接去cardBind.do接口
+                            if (false) {
+                                location.href = /wxis/+'/act/member/cardBind.do?trueName=' + $(this).next().text() + '&memberId=' + $(this).val() + '&redirectUrl=/act/order/buildOrderPage.do';
+                                $(this).removeAttr("checked");
+                            } else {
+                                queryArchivesOnline();
+                            }
+                        }
+                    }
+                });
+
+                //点击"添加就诊人"
+                $("input[name=addmid]").click(function () {
+                    //开通二合一，其他都不用管，直接去add.do接口
+                    if (false) {
+                        location.href = /wxis/+'/act/member/add.do?r=1679988726965&redirectUrl=/act/order/buildOrderPage.do';
+                    } else {
+                        if ('' != null && '' != "") {
+                            //微信公众号渠道，添加就诊人先跳转至腾讯授权页获取用户实名信息
+                            var tencentRedirectUrl = '/member/addMemberInfo.do?opt=addmember&redirectUrl=/wxis/act/order/buildOrderPage.do';
+                            location.href = '/wxis/user/tencentAuthoriza.do?tencentRedirectUrl=' + tencentRedirectUrl;
+                            //location.href = /wxis/+'/member/addMemberInfo.do?opt=addmember&redirectUrl=/wxis/act/order/buildOrderPage.do';
+                        } else {
+                            
+                            
+                            location.href = /wxis/+'/act/member/add.do?r=1679988726965&redirectUrl=/act/order/buildOrderPage.do';
+                            
+                            
+                        }
+                    }
+                    $(this).removeAttr("checked");
+                });
+
+                //点击切换支付方式
+                $('.cur_payway').on('click', function () {
+                    $(this).find("a").addClass("paybor");
+                    $(this).siblings().find("a").removeClass("paybor");
+                    // 接入神策数据埋点-按钮点击
+                    window.sendSensorsDataClickButton()
+                });
+
+                $('.pop-cancel').click(function () {
+                    $(this).parents('.pop-mask').hide();
+                });
+                
+                // payway 支付方式 点击事件
+                $(".payway li").bind("click", function () {
+                    var obj = $(this);
+                    
+                    if (typeof (obj.find("a").attr("data-method")) == 'undefined') {
+                        return;
+                    }
+                    obj.find("a").addClass("paybor");
+                    obj.siblings("li").find("a").removeClass("paybor");
+                    $("#input_pay_method").val(parseInt(obj.find("a").attr("data-method")));
+                    var val = obj.find("a").attr("data-method");
+
+                    if (val == 22 || val == 25) {
+                        $("#yibao").text("选择医保支付，后续的就诊费用可使用医保支付");
+                        $("#iconyibao").removeClass("co-4").addClass("co-6");
+                        $(".yibao").show();
+                        //#22659 医保支付须知弹窗, 支持配置 唐莉 2017/02/16
+                        var pop_tips_social_pay_text = "";
+                        if (null == pop_tips_social_pay_text || "" == pop_tips_social_pay_text || "null" == pop_tips_social_pay_text) {
+                            pop_tips_social_pay_text = "1.提交订单后请尽快完成支付，逾时号源作废<br><br>2.实名认证的姓名与就诊人姓名一致才能使用医保支付<br><br>3.目前仅支持一档医保（综合医保）的在线挂号及诊间支付，二三档医保请到人工窗口交费";
+                        }
+                        pop_tips_show_with_function("医保支付须知", pop_tips_social_pay_text);
+                    } else if (val == 221 || val == 251) {
+                        //少儿医保提示语
+                        var childSocialTips = "";
+                        if (null == childSocialTips || "" == childSocialTips || "null" == childSocialTips) {
+                            childSocialTips = "1.提交订单后请尽快完成支付，逾时号源作废<br><br>2.实名认证的姓名与就诊人姓名一致才能使用医保支付<br>";
+                        }
+                        var yibaoGuideBtn = false;
+                        if (yibaoGuideBtn && val == 251) {
+                            pop_two_button_tips_show("医保支付须知", childSocialTips, "close_two_button_tips", "我知道了", "yibaoGuide", "");
+                        } else {
+                            pop_tips_show_with_function("医保支付须知", childSocialTips);
+                        }
+
+                    } else if (val == 13 || val == 14) {
+                        $("#yibao").text(ownPayTips || '选择自费支付, 后续的就诊费用将不可使用医保支付');
+                        var pop_tips_zifei_pay_text = "";
+                        if (pop_tips_zifei_pay_text != null && pop_tips_zifei_pay_text != '' && pop_tips_zifei_pay_text != 'null') {
+                            pop_tips_show_with_function("自费支付须知", pop_tips_zifei_pay_text);
+                        }
+
+                        $("#iconyibao").removeClass("co-6").addClass("co-4");
+                        $(".yibao").hide()
+                    } else if (val == 252) {
+                        var is_open_zhuanzhen_yuyue = "";
+                        var zhuanzhen_yuyue_tip = "";
+
+                        if (is_open_zhuanzhen_yuyue == '1' || is_open_zhuanzhen_yuyue == 1) {
+                            // 转诊预约弹窗显示
+                            pop_tips_show("温馨提示", zhuanzhen_yuyue_tip);
+                        }
+                    }
+                });
+            });
+
+            function yibaoGuide() {
+                window.location.href = "";
+            }
+
+            //保存用户信息
+            function saveMember(memberId, idCardType, memeberIdCard, memberBirthday, memberSex, countiesId, countiesName, detaladdress, guardianMemberId, dep_id, doc_id, unit_id) {
+                $.ajax({
+                    url: '/wxis/act/order/saveMember.do?r=1679988726965',
+                    type: 'post',
+                    data: {
+                        'memberId': memberId,
+                        'idCardType': idCardType,
+                        'memeberIdCard': memeberIdCard,
+                        'memberBirthday': memberBirthday,
+                        'memberSex': memberSex,
+                        'countiesId': countiesId,
+                        'countiesName': countiesName,
+                        'detaladdress': detaladdress,
+                        'guardianMemberId': guardianMemberId
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == "true") {
+                            vant.Toast('就诊人补全信息成功！')
+                            //就诊人补全信息成功，提交订单
+                            $(".patient_data_content").addClass("none")
+                            $('html').attr('style', '')
+                            $(".maindiv").removeClass("none")
+                            $(document).attr('title', '提交订单');
+
+                            $(this).attr('disabled', true);
+                            $(this).addClass('is-disabled');
+                            //儿童医院判断是否已建档
+                            if ("138" == '111' && $("#createArchivesOnline").text() != "已建档") {
+                                pop_tips_nopay();
+                            } else {
+                                if ($("#input_pay_method").val() == '25' || $("#input_pay_method").val() == '22') {
+                                    //检查是否绑定医保卡
+                                    if (checkIsMedicalCard()) {
+                                        // 两癌筛查预约新增条件校验
+                                        // 取消自动提交
+                                        // ifjiashou(memberId, dep_id, doc_id, unit_id)
+                                        // 重新加载页面
+                                        location.reload()
+                                    }
+                                } else {
+                                    // 两癌筛查预约新增条件校验
+                                    // 取消自动提交
+                                    // ifjiashou(memberId, dep_id, doc_id, unit_id)
+                                    // 重新加载页面
+                                    location.reload()
+                                }
+                            }
+                        } else {
+                            if (data.data.indexOf("您所输入的证件号已被您的家庭成员") > -1 || data.data.indexOf("您所输入的证件号已绑定为") > -1) {
+                                pop_two_button_tips_show_common("温馨提示", data.data, "contactCustomerService", "联系客服", "close_two_button_tips", "我知道了");
+                                return;
+                            }
+                            pop_tips_show_wrap("温馨提示", data.data);
+                        }
+                    }
+                });
+            }
+
+            function ifjiashou(memberId, dep_id, doc_id, unit_id) {
+                $.ajax({
+                    url: '/wxis/act/order/checkRiseAmt.do?r=1679988726965',
+                    type: 'post',
+                    data: {'memberId': memberId, 'dep_id': dep_id, 'doc_id': doc_id, 'unit_id': unit_id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data == null) {
+                            pop_tips_show_wrap("异常!", "服务器异常!");
+                            return false;
+                        } else if (data.ifAddGhAmt == '1' && data.hasSchExtraAmt == '1') {
+                            $("#order_info_AMT").text('¥' + '25.0')
+                            pop_tips_show_jiashou("挂号须知!", data.tips)
+                        } else if (data.ifAddGhAmt == '1') {
+                            pop_tips_show_jiashou("挂号须知!", data.tips);
+                        } else if (data.ifAddGhAmt == '0') {
+                            //提示系统加载中，页面不可点击
+                            isLoading();
+                            //不需要加收
+                            $('#form1').submit();
+                        }
+                    }
+                });
+            }
+
+            function isLoading() {
+                createMask();
+                $(".systemIsloading").show();
+            }
+
+            //加收金额
+            function pop_tips_show_jiashou(title, content) {
+                cancelMask();
+                if ($(".tips_show_jiashou").length == 0) {
+                    $("body").append('<div class="tips_show_jiashou mask take01">'
+                        + '<div class="takenumber">'
+                        + '<h2>' + title + '</h2>'
+                        + '<p>' + content + '</p>'
+                        + '<div class="takebtn">'
+                        + '<a href="javascript:close_pop_tips_show_jiashou()" style="width:100%">我知道了</a>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>');
+                } else {
+                    $(".tips_show h2").html(title);
+                    $(".tips_show p").html(content);
+                    $(".tips_show").show();
+                }
+            }
+
+            function close_pop_tips_show_jiashou() {
+                $(".tips_show_jiashou").hide();
+                isLoading();
+                $('#form1').submit();
+            }
+            
+            //去实名认证
+            function toCertification() {
+
+                var memberId = $("#user:checked").val();
+                window.location = '/wxis/user/toCertificate.do?r=1679988726965' + "&userId=222573553&memberId=" + memberId;
+            }
+
+            //获取是否需要实名认证标识
+            function getVerifyFlag(memberId) {
+                var memberVerify = "0";
+                var requestParater = {
+                    'userId': '222573553',
+                    'memberId': memberId
+                };
+                $.ajax({
+                    url: '/wxis/user/checkCertificate.do?r=1679988726965',
+                    type: 'post',
+                    data: requestParater,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success == true) {
+                            memberVerify = data.object;
+                        }
+                    }
+                });
+
+                return memberVerify;
+            }
+
+            function checkIsMedicalCard() {
+                var memberid = $("#user:checked").val();
+                var result = false;
+                var mnamekey = memberid + '_membName';
+                var mname = $("#" + mnamekey).val();
+                var socialType = $("#socialType").val();
+                if (socialType == 'sceneSocial') {
+                    //现场医保不需要校验绑定医保卡
+                    return true;
+                }
+                if (socialType != 'childSocial') {
+                    socialType = 'adultSocial';
+                }
+                var resData;
+                if ("childSocial" == socialType && $("#input_pay_method").val() == '25') {
+                    resData = {
+                        'memberId': memberid,
+                        'unitId': '138',
+                        'orderNo': '',
+                        'medical_state': 'sch',
+                        'userId': '222573553',
+                        'socialType': socialType,
+                        'patient_name': mname,
+                        'payway': $("#input_pay_method").val(),
+                        'yuyueUserType': $("#yuyueUserType").val(),
+                        'memberType': $("#memberType").val(),
+                        'selectYiBaoFlag': '',
+                        'method': 'sch',
+                        'dep_id': '4703',
+                        'doc_id': '100220744'
+                    };
+                } else {
+                    resData = {
+                        'memberId': memberid,
+                        'unitId': '138',
+                        'orderNo': '',
+                        'medical_state': 'sch',
+                        'userId': '222573553',
+                        'socialType': socialType,
+                        'patient_name': mname,
+                        'payway': $("#input_pay_method").val(),
+                        'yuyueUserType': $("#yuyueUserType").val(),
+                        'memberType': $("#memberType").val(),
+                        'selectYiBaoFlag': '',
+                        'method': 'sch',
+                        'dep_id': '4703',
+                        'doc_id': '100220744'
+                    }
+                }
+                //医保支付必须绑医保卡
+                $.ajax({
+                    url: ctx + "/ismedicalcard.do",
+                    async: false,
+                    type: "post",
+                    data: resData,
+                    success: function (data) {
+                        if (data.success) {
+                            result = true;
+                        } else {
+                            //状态为3表示已从社保局查出社保卡号(社保卡未在用户中心绑定,暂不处理), 但是未在用户中心绑定就诊卡, 拉起绑就诊卡流程
+                            //状态为2表示未绑定社保卡, 拉起绑卡流程
+                            if (data.object.code == '1' || data.object.code == '2' || data.object.code == '3') {
+                                window.location = data.object.url;
+                            } else if (data.object.code == '4') {
+                                pop_tips_social_pay_no_first_adult('');
+                                return;
+                            } else if (data.object.code == '5') {  //状态为5表示成人就诊人姓名不匹配
+                                pop_tips_social_pay_name_no_match_adult('');
+                                return;
+                            } else if (data.object.code == '6') {   //状态为6表示少儿就诊人姓名不匹配
+                                sendUrl = data.object.url;
+                                pop_tips_social_pay_name_no_match_child('');
+                                return;
+                            } else {
+                                alert(data.msg);
+                            }
+                            cancelMask();
+                        }
+                    }
+                });
+                return result;
+            }
+
+            function showAgree(){
+                const str  = ''
+                $('#agreeContent').html(str)
+                $('#confirmAgree').show()
+            }
+            $(".cancel-btn").click(function(){
+                $('#isAgree2').click()
+                $('#isAgree2').attr('checked',true)
+                $('#isAgree').val('2')
+                $("#confirmAgree").hide();
+            });
+            $(".agree-btn").click(function(){
+                $('#isAgree1').click()
+                $('#isAgree1').attr('checked',true)
+                $('#isAgree').val('1')
+                $("#confirmAgree").hide();
+            });
+            
+            
+            function queryArchivesOnline() {
+                $('#ArchivesOnlineDiv a').attr("onclick", "");
+                $("#createArchivesOnline").text("查询中");
+                $(".takeokshow").show();
+                $.ajax({
+                    url: '/wxis/act/order/queryArchivesOnline.do?r=1679988726966',
+                    type: 'post',
+                    data: {
+                        'memberId': $("[name=mid]:checked").val(),
+                        'unit_id': '138'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == "success") {
+                            var state = data.data.state;
+                            
+                            if (state == 1 || state == "1") {
+                                $('#ArchivesOnlineDiv a').attr("onclick", "");
+                                $("#createArchivesOnline").text("已建档");
+                                $("#createArchivesOnline").siblings("i").hide();
+                            } else if (state == 10 || state == "10") {
+                                $('#ArchivesOnlineDiv a').attr("onclick", "createPageHref()");
+                                $("#createArchivesOnline").text("已建档");
+                                $("#createArchivesOnline").siblings("i").show();
+                            } else {
+                                $('#ArchivesOnlineDiv a').attr("onclick", "createPageHref()");
+                                $("#createArchivesOnline").text("未建档");
+                                $("#createArchivesOnline").siblings("i").show();
+                            }
+                        } else {
+                            //查询失败
+                            alert(data.msg);
+                        }
+                    },
+                    complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                        $(".takeokshow").hide();
+                    }
+                });
+            }
+
+            
+            function createPageHref() {
+                window.location.href = '/wxis//act/order/createArchivesOnlinePage.do?unit_id=138&memberId=' + $("[name=mid]:checked").val();
+            }
+
+            //无建档提示框
+            function pop_tips_nopay() {
+                cancelMask();
+                if ($(".tips_nopay").length == 0) {
+                    $("body").append('<div class="tips_nopay mask  take02 notitle_tips">'
+                        + '<div class="takenumber">'
+                        + '<h2>请在线建档完善档案信息</h2>'
+                        + '<p>深圳市儿童医院实行全预约实名认证，请点击在线建档完善档案信息后才可成功预约</p>'
+                        + '<div class="takebtn">'
+                        + '<a href="javascript:void(0);" class="closeTips">取消</a>'
+                        + '<a href="javascript:createPageHref();" class="oksubmit" >在线建档</a>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>');
+                } else {
+                    $(".tips_nopay").show();
+                }
+                //无订单则返回支付列表
+                $(".closeTips").click(function () {
+                    $(".tips_nopay").hide();
+                });
+            }
+            
+            // 点击就诊人
+            function memberClick(memberId, cardNo, name) {
+                vm.setData()
+                checkBindCard(memberId, cardNo, name);
+                checkEpidemicSurvey(memberId);
+                var memberTypeFlag = '';
+                if ("1" == memberTypeFlag) {
+                    var membType = $("#" + memberId + "_membType").val();
+                    $("#memberType").val(membType);
+                    var membCard = $("#" + memberId + "_membCard").val();
+                    // if (null != membType && '' != membType && 'undefined' != membType) {
+                    //     if (membType == '2') {//医保用户
+                    //         $("#span_member_id").html("医保");
+                    //         $("#select_memType_id").show();
+                    //     } else {//自费用户
+                    //         $("#span_member_id").html("自费");
+                    //         $("#select_memType_id").show();
+                    //     }
+                    // } else {
+                        if (null == cardNo || '' == cardNo || 'undefined' == cardNo) {
+                            $("#select_memType_id").hide();
+                            return;
+                        }
+
+                        if (null != cardNo && '' != cardNo && 'undefined' != cardNo) {
+                            var requestParam = {
+                                'unitId': '138',
+                                'cardNo': cardNo,
+                                'name': name,
+                                'memberId': memberId
+                            };
+                            $.ajax({
+                                url: '/wxis/ajax/queryMemberType.do?r=1679988726966',
+                                type: 'post',
+                                data: requestParam,
+                                dataType: 'json',
+                                success: function (data) {
+                                    var card_type = '2';//查询失败默认为2
+                                    if (data.result == "1") {
+                                        card_type = data.data[0].card_type;
+                                    }
+                                    if (card_type == '1') {//自费用户
+                                        $("#span_member_id").html("自费");
+                                        $("#select_memType_id").show();
+                                    } else {
+                                        $("#span_member_id").html("医保");
+                                        $("#select_memType_id").show();
+                                    }
+                                    $("#" + memberId + "_membType").val(card_type);
+                                    $("#memberType").val(card_type);
+                                    /* var value = getCookie("MEMBER_TYPE_COOKIE");
+                                    var valueStr = "";
+                                    if(null != value && '' != value && 'undefined' != value){
+                                        valueStr = value + ("," + memberId + "-" + card_type);
+                                    }else{
+                                        valueStr = memberId + "-" + card_type;
+                                    }
+                                    setCookie("MEMBER_TYPE_COOKIE", valueStr, 15); */
+                                },
+                                complete: function (XMLHttpRequest, status) {
+                                }
+                            });
+                        }
+                    // }
+                }
+            }
+            
+            //设置cookie
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                var path = ";path=/";
+                document.cookie = cname + "=" + cvalue + "; " + expires + path;
+            }
+
+            //获取cookie
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+
+            function pop_tips_onclick_notitle(content, func) {
+                if ($(".notitle_tips").length == 0) {
+                    $("body").append('<div  class="mask  take02 notitle_tips" >'
+                        + '<div class="takenumber nopay center" style="top:45%">'
+                        + '<p style="font-size:16px;">' + content
+                        + '</p><div class="takebtn">'
+                        + '<a href="javascript:' + func + '" style="width:100%">我知道了</a></div></div></div>');
+                } else {
+                    $(".notitle_tips p").html(content);
+                    $(".notitle_tips").show();
+                }
+            }
+
+            function membType(value) {
+                $("#memberType").val(value);
+                if ("1" == value) {
+                    $("#span_member_id").html("自费");
+                } else {
+                    $("#span_member_id").html("医保");
+                }
+                $("#id-memberType").hide();
+            }
+
+            function selMemberType() {
+                var memberId = $("#user:checked").val();
+                var membType = $("#" + memberId + "_membType").val();
+                if ("1" == membType) {
+                    $("#member_type_1").html("自费（与医院档案一致）");
+                    $("#member_type_2").html("医保");
+                } else {
+                    $("#member_type_1").html("自费");
+                    $("#member_type_2").html("医保（与医院档案一致）");
+                }
+                $('#id-memberType').show();
+            }
+
+            //跳转选择监护人列表页
+            function guardianList() {
+                var noCardChildenMemberId = $("#user:checked").val(); //就诊人memberId
+                var noCardChildenName = $("#mname").val();		//儿童姓名
+                var noCardChildenCardType = $("#idcard_type").val();//儿童证件类型
+                var noCardChildenCardNumber = $("#member_idcard").val();		//儿童身份证号
+                var noCardChildenDate = $(".member_bri").text();		//儿童出生日期
+                var noCardChildenSex = $('input:radio[name="radio"]:checked').val();	//儿童性别
+                var noCardChildenCity = $("#countiesId").val();		//	儿童所在城市
+                var noCardChildenAddress = $("#detaladdress").val();		//儿童详细地址
+                var param = "memberId=" + noCardChildenMemberId + "&childenName=" + noCardChildenName + "&childenCardType=" + noCardChildenCardType + "&childenCardNumber=" + noCardChildenCardNumber + "&childenDate=" + noCardChildenDate + "&childenSex=" + noCardChildenSex + "&childenCity=" + noCardChildenCity + "&childenAddress=" + noCardChildenAddress;
+                window.location.href = "/wxis/act/Guardian/selectGuardian.do?r=1679988726966&guardianRedirectUrl=%2Fact%2Forder%2FbuildOrderPage.do%3Funit_id%3D138%26branch_id%3D200051254%26origin_unit_id%3D138%26method%3Dsch1&" + param;
+            }
+
+            //保存监护人信息(在用户中心保存为就诊人)
+            function saveGuardianInfo() {
+                var guardianName = $.trim($("#guardianTrueName").val());  // 监护人姓名
+                var guardianCardType = $.trim($("#guardianCardType").attr("valueCode"));  // 监护人证件类型
+                var guardianCardNumber = x2X($.trim($("#guardianCardNumber").val()));  // 监护人证件号
+                var guardianBirthdate = $.trim($("#guardian_date").val());    // 监护人出生日期
+                var guardianSex = $('input:radio[name="patient_guardian_radio"]:checked').val();      // 监护人性别
+                var guardianMemberId = $.trim($("#guardianMemberId").val());//监护人memberId;
+                if (guardianName == '' && guardianMemberId == '' && guardianCardNumber == '') {
+                    //未填写监护人信息，则不进行保存监护人操作
+                    return;
+                }
+
+                $.ajax({
+                    url: /wxis/+'member/saveGuardian.do',
+                    data: {
+                        'memberId': guardianMemberId,
+                        'birthday': guardianBirthdate,
+                        'sex': guardianSex,
+                        'idCard': guardianCardNumber,
+                        'idCardType': guardianCardType,
+                        'opt': '',
+                        'name': guardianName,
+                        'isEditMember': 'true'
+                    },
+                    dataType: 'json',
+                    type: 'post',
+                    async: false,
+                    success: function (data) {
+
+                        if (data.success) {
+                            //存放返回的监护人memberId
+                            $("#guardianMemberId").val(data.object.memberId.toString());
+                        } else if (!data.success) {
+                            if (data.msg.indexOf("您所输入的证件号已被您的家庭成员") > -1 || data.msg.indexOf("您所输入的证件号已绑定为") > -1) {
+                                pop_two_button_tips_show_common("温馨提示", data.msg, "contactCustomerService", "联系客服", "close_two_button_tips", "我知道了");
+                                return;
+                            }
+                            pop_tips_notitle("保存监护人信息失败：" + data.msg);
+                        }
+
+                    },
+                    complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数//不管请求成功还是失败，都会执行这里
+
+                        if (status != 'success') {  //超	时,status还有success,error等值的情况
+                            pop_tips_notitle("网络不给力，请稍后再试。");
+                        }
+                    }
+                });
+            }
+
+            //添加紧急联系人
+            function addEmergencyContactFunc() {
+                var chooseMemberId = $("input[name='mid']:checked").val();
+                var urlStr = "/wxis/act/order/addEmergencyContact.do?r=1679988726966";
+                var paramStr = '';
+                var emContactName = '';
+                var emContactPhone = '';
+                var params = {
+                    "emergencyContactRedirectUrl": paramStr,
+                    "emContactName": emContactName,
+                    "emContactPhone": emContactPhone,
+                    "chooseMemberId": chooseMemberId
+                };
+                postData(urlStr, params);
+            }
+
+            //设置紧急联系人回来后选中原先的就诊人（已有选中）
+            function afterContactSet() {
+                var returnMemberId = '';
+                if (returnMemberId != "" && returnMemberId != null && returnMemberId != undefined) {
+                    $("input:radio[name='mid'][value='']").prop("checked", true);
+                }
+            }
+
+            afterContactSet();
+
+            function postData(url, params) {
+                // 创建form元素
+                var temp_form = document.createElement("form");
+                // 设置form属性
+                temp_form.action = url;
+                temp_form.target = "_self";
+                temp_form.method = "post";
+                temp_form.style.display = "none";
+                // 处理需要传递的参数
+                for (var x in params) {
+                    var opt = document.createElement("textarea");
+                    opt.name = x;
+                    opt.value = params[x];
+                    temp_form.appendChild(opt);
+                }
+                document.body.appendChild(temp_form);
+                // 提交表单
+                temp_form.submit();
+            }
+
+            //流调问卷
+            function surveyPop(title, content, button) {
+                pop_tips_show_with_function2(title, content,
+                    button, gotosurvey);
+            }
+
+            function gotosurvey() {
+                window.location.href = epidemicSurveyJump;
+            }
+
+            function checkBindCard(memberId, cardNo, name) {
+                // 没有绑就诊卡
+                if (cardNo === '' || cardNo === 'undefined' || cardNo === 'null') {
+                    if ('0' === '1') {
+                        let redirectUrl = encodeURIComponent(encodeURIComponent("/act/order/buildOrderPage.do"));
+                        window.location.href = "/wxis/act/member/cardBind.do?trueName=" + name + "&memberId=" + memberId + "&redirectUrl=" + redirectUrl;
+                        $(this).removeAttr("checked");
+                        return false;
+                    }
+                }
+            }
+
+            var epidemicSurveyJump = null;
+
+            //异步检查流调是否要填
+            function checkEpidemicSurvey(memberId) {
+                var epidemicSurveyOpen = '';
+                if (epidemicSurveyOpen != "1") {
+                    return;
+                }
+                $.ajax({
+                    url: '/wxis/ajax/queryEpidemicSurvey.do?r=1679988726966&unitId=138&memberId=' + memberId,
+                    type: 'get',
+                    timeout: 3000,
+                    success: function (data) {
+                        if (data.success) {
+                            var message = data.object;
+                            epidemicSurveyJump = '/wxis/act/auto/authLoginToHref.do?unitId=138&opt=add&method=sch&bussType=order&memberId=' + memberId;
+                            surveyPop(message.title, message.content, message.button);
+                        }
+
+                    },
+                    complete: function (XMLHttpRequest, status) {
+                    }
+                });
+            }
+        </script>
+        
+        <script type="text/javascript" src="/wxis/assets/js-base64/base64.js"></script>
+        <script type="text/javascript" src="/wxis/assets/sensors-data/autotrack-prod-220825.js"></script>
+        <script type="text/javascript" src="/wxis/assets/axios/axios.js"></script>
+        
+        <script>
+            // 接入神策数据埋点-页面加载完毕
+            document.addEventListener('DOMContentLoaded',()=>{
+                axios({
+                    url: '/wxis/user/getLoginInfo.do',
+                    method: 'get'
+                }).then(result=>{
+                    // 接入神策数据埋点-定义数据
+                    const sensorsDataUnitId = '138'?'138':''
+                    const sensorsDataUnitName = '中国科学院大学深圳医院'?'中国科学院大学深圳医院':''
+                    let sensorsDataLoginStatus = 0
+                    const data = result.data
+                    if(data && data.success){
+                        const object = data.object
+                        if(object){
+                            sensorsDataLoginStatus = object.isLogin?1:0
+                            if(sensorsDataLoginStatus && object.userId){
+                                sensors.login(object.userId)
+                            }
+                        }
+                    }
+                    const sensorsDataDepartmentId = '4703'?'4703':''
+                    const sensorsDataDepartmentName = '口腔科(西院区)'?'口腔科(西院区)':''
+                    const sensorsDataDoctorId = '100220744'?'100220744':''
+                    const sensorsDataDoctorName = '石志强'?'石志强':''
+                    const sensorsDataDoctorZcname = '主治医师'?'主治医师':''
+                    // 接入神策数据埋点-页面曝光函数
+                    function sendSensorsDataLoadPage(){
+                        console.log('页面曝光')
+                        sensorsCustomize.$customizeEvent('hzd_normalPage_pageShow',{
+                            page_id: 'submitOrderPage_normalPage',
+                            page_name: '提交订单页',
+                            unit_id: sensorsDataUnitId,
+                            unit_name: sensorsDataUnitName,
+                            login_status: sensorsDataLoginStatus,
+                            dep_id: sensorsDataDepartmentId,
+                            dep_name: sensorsDataDepartmentName,
+                            doctor_id: sensorsDataDoctorId,
+                            doctor_name: sensorsDataDoctorName,
+                            doctor_zcname: sensorsDataDoctorZcname
+                        })
+                    }
+                    // 接入神策数据埋点-按钮点击函数
+                    function sendSensorsDataClickButton(){
+                        console.log('按钮点击')
+                        const sensorsDataMemberIdInput = document.querySelector("#user:checked")
+                        const sensorsDataMemberId = sensorsDataMemberIdInput?sensorsDataMemberIdInput.value:''
+                        const sensorsDataMemberName = sensorsDataMemberId?document.getElementById(sensorsDataMemberId+'_membName').value:''
+                        const sensorsDataUserTypeDom = document.querySelector('.paybor')
+                        const sensorsDataUserType = sensorsDataUserTypeDom && sensorsDataUserTypeDom.textContent.trim()
+                        sensorsCustomize.$customizeEvent('hzd_normalPage_buttonClick',{
+                            page_id: 'submitOrderPage_normalPage',
+                            page_name: '提交订单页',
+                            button_name: '提交',
+                            unit_id: sensorsDataUnitId,
+                            unit_name: sensorsDataUnitName,
+                            login_status: sensorsDataLoginStatus,
+                            dep_id: sensorsDataDepartmentId,
+                            dep_name: sensorsDataDepartmentName,
+                            doctor_id: sensorsDataDoctorId,
+                            doctor_name: sensorsDataDoctorName,
+                            doctor_zcname: sensorsDataDoctorZcname,
+                            price: '25.0',
+                            user_type: sensorsDataUserType,
+                            user_visit_date: '2023-03-30',
+                            user_visit_time: '14:00-14:30'
+                        })
+                    }
+                    window.sendSensorsDataClickButton = sendSensorsDataClickButton
+                    // 接入神策数据埋点-页面曝光
+                    sendSensorsDataLoadPage()
+                }).catch(error=>{
+                    console.log('error:',error)
+                })
+            })
+        </script>
+        <!-- 版权标识 -->
+        
+<script type="text/javascript" src="/wxis/js/jquery-1.9.1.js?version=20220111231231228224285750200316"></script>
+<script type="text/javascript" src="/wxis/js/jquery-migrate-1.2.1.js"></script>
+	<script type="text/javascript">
+		//页面加载完成时执行
+		$(function(){
+			changeCopyrightStyle();
+			hiddenCopyRight();
+		});
+		//屏幕大小改变时，判断操作（弹出输入法框）
+		$(window).resize(function(){
+			changeCopyrightStyle();
+		});
+   			
+		function changeCopyrightStyle(){
+			var currentHeight = $(document).height(); 	//浏览器当前的高度
+			var bodyHeight=$("html").height();			//html高度
+
+			var copyrightHeight=$("#copyright").height();
+			var copyrightPosition=$("#copyright").css("position");
+          //  alert([currentHeight,bodyHeight])
+			if($.trim(copyrightPosition)=="absolute"){
+				
+			}else{
+				copyrightHeight=0;
+			}
+			//更改显示方式		
+    		if( bodyHeight+copyrightHeight+50 >= currentHeight ){
+        		$("#copyright").css("position","static");
+   			}else{       
+       			$("#copyright").css("position","absolute");
+   			}   
+		}
+
+		//第三方区域id(淮南等),底部样式不显示
+		function hiddenCopyRight(){
+			if('' != null && '' != ""){
+				$("#copyright").css("display","none");
+			}
+		}
+
+</script>
+
+
+<div id="copyright">由健康160提供技术支持</div>
+
+
+
+
+
+
+
+
+        <!-- 百度统计 -->
+        <div style="display: none;">
+	<!-- ç¾åº¦ç»è®¡ -->
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?9dfab24c47d6287a3024bd4d62aa2d77";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>		
+</div>
+    </body>
+</html>
